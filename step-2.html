@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Step 2: Create Client Store Ticker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #004080;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .step-content {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .step-content h2 {
+      color: #004080;
+    }
+
+    .step-content p {
+      margin-bottom: 20px;
+    }
+
+    .ticker-container {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #e9f1ff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .ticker-container input,
+    .ticker-container button {
+      padding: 10px;
+      font-size: 1rem;
+      margin-top: 10px;
+      width: 100%;
+      max-width: 300px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+    }
+
+    .ticker-container button {
+      background-color: #004080;
+      color: white;
+      cursor: pointer;
+    }
+
+    .ticker-container button:hover {
+      background-color: #003366;
+    }
+
+    .generated-ticker {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #007bff;
+      padding-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+      background-color: #e9f1ff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Step 2: Create Client Store Ticker</h1>
+  </header>
+
+  <div class="step-content">
+    <h2>Step 2.1: Generate a Short 3–5 Character Ticker for Internal Use</h2>
+    <p>The ticker should be a short, memorable abbreviation that will help you quickly identify the store for internal purposes. For example:</p>
+    <blockquote>
+      <strong>Example:</strong> <em>brilliance.com → BRIL</em>
+    </blockquote>
+    <p>Enter the store name below, and we will generate a suitable ticker for you.</p>
+
+    <div class="ticker-container">
+      <label for="storeName">Enter the Store Name (e.g., brilliance.com):</label>
+      <input type="text" id="storeName" placeholder="e.g. brilliance.com" />
+      <button onclick="generateTicker()">Generate Ticker</button>
+
+      <div id="result" class="generated-ticker"></div>
+    </div>
+
+    <h2>Additional Notes:</h2>
+    <ul>
+      <li>Use a combination of the company’s name or website domain.</li>
+      <li>Avoid overly generic letters, as the ticker will be used in various internal documents and communications.</li>
+    </ul>
+  </div>
+
+  <footer>
+    &copy; 2025 Fulfill · Internal Use Only
+  </footer>
+
+  <script>
+    function generateTicker() {
+      const storeName = document.getElementById("storeName").value.trim().toLowerCase();
+      
+      if (storeName === "") {
+        document.getElementById("result").innerText = "❌ Please enter a store name.";
+        return;
+      }
+
+      // Clean the input to remove any unnecessary characters
+      const cleaned = storeName
+        .replace(/^https?:\/\//, '')      // Remove any URL prefix
+        .replace(/^www\./, '')            // Remove 'www.'
+        .replace(/\.(com|store|shop|net|io|co|org|biz)$/, '')  // Remove common TLDs
+        .replace(/[^a-z]/g, '');         // Remove non-alphabetic characters
+
+      // Generate the ticker: 3-5 characters, uppercased
+      const ticker = cleaned.substring(0, 5).toUpperCase();
+
+      if (ticker) {
+        document.getElementById("result").innerText = `✅ Suggested Ticker: ${ticker}`;
+      } else {
+        document.getElementById("result").innerText = "❌ Please enter a valid store name.";
+      }
+    }
+  </script>
+
+</body>
+</html>

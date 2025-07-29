@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Step 7: Share Operating Hours</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #004080;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .step-content {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .step-content h2 {
+      color: #004080;
+    }
+
+    .step-content p {
+      margin-bottom: 20px;
+    }
+
+    .timezone-section {
+      background: white;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 6px #ccc;
+    }
+
+    label, select, input, button {
+      font-size: 16px;
+    }
+
+    select, input, button {
+      padding: 6px 8px;
+      margin-top: 8px;
+    }
+
+    #convertedTime {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #0066cc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+      background-color: #e9f1ff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Step 7: Share Operating Hours</h1>
+  </header>
+
+  <div class="step-content">
+    <h2>7.1. Use a timezone converter (or AI tools) to find the client’s local time relative to China.</h2>
+    <p>This tool will help you find the client's local time relative to China.</p>
+
+    <div class="timezone-section">
+      <h3>🕒 Time Zone Converter</h3>
+      <p>Select the client's time zone and get the conversion to China time:</p>
+
+      <label for="timezone">Client Time Zone:</label><br>
+      <select id="timezone">
+        <option value="0">UTC</option>
+        <option value="-5">Eastern Time (EST / UTC-5)</option>
+        <option value="-4">Eastern Daylight Time (EDT / UTC-4)</option>
+        <option value="-6">Central Time (CST / UTC-6)</option>
+        <option value="-8">Pacific Time (PST / UTC-8)</option>
+        <option value="1">Central European Time (CET / UTC+1)</option>
+        <option value="2">Eastern European Time (EET / UTC+2)</option>
+        <option value="5.5">India Standard Time (IST / UTC+5:30)</option>
+        <option value="7">Thailand (UTC+7)</option>
+        <option value="8" selected>China Standard Time (CST / UTC+8)</option>
+        <option value="9">Japan / Korea (UTC+9)</option>
+        <option value="10">Sydney (UTC+10)</option>
+      </select><br><br>
+
+      <button onclick="convertTime()">Convert</button>
+
+      <div id="convertedTime"></div>
+    </div>
+
+    <h2>7.2. Share China office hours with the client:</h2>
+    <p>China Team Operating Hours:</p>
+    <ul>
+      <li>Monday – Saturday: 10:00 AM – 7:00 PM</li>
+      <li>Closed on Sundays</li>
+    </ul>
+    <p>Note: Some admins may continue working remotely after regular hours.</p>
+    <p><strong>⚠️ You may wait until Day 2 to send this information.</strong></p>
+  </div>
+
+  <footer>
+    &copy; 2025 Fulfill · Internal Use Only
+  </footer>
+
+  <script>
+    function convertTime() {
+      const clientOffset = parseFloat(document.getElementById("timezone").value);
+      const chinaOffset = 8;
+
+      const now = new Date();
+
+      const chinaTime = new Date(now.getTime() + (chinaOffset - now.getTimezoneOffset() / 60) * 3600000);
+      const clientTime = new Date(now.getTime() + (clientOffset - now.getTimezoneOffset() / 60) * 3600000);
+
+      const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      };
+
+      const chinaStr = chinaTime.toLocaleTimeString('en-GB', options);
+      const clientStr = clientTime.toLocaleTimeString('en-GB', options);
+      const offsetDiff = chinaOffset - clientOffset;
+      const offsetLabel = offsetDiff === 0 ? "both time zones are the same" : `China is ${Math.abs(offsetDiff)} hour(s) ${offsetDiff > 0 ? "ahead of" : "behind"} the client`;
+
+      document.getElementById("convertedTime").innerHTML =
+        `🕗 <strong>China Time:</strong> ${chinaStr}<br>
+         🕗 <strong>Client Time:</strong> ${clientStr}<br>
+         ⏱️ <em>${offsetLabel}</em>`;
+    }
+  </script>
+
+</body>
+</html>

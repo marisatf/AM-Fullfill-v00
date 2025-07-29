@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Step 12 - Schedule Weekly Calls</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+    h1 {
+      color: #0066cc;
+    }
+    .section {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 6px #ccc;
+    }
+    p {
+      font-size: 16px;
+    }
+    .note {
+      font-style: italic;
+      color: #666;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, select, button {
+      padding: 8px 10px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005bb5;
+    }
+    .trello-link {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    .trello-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Step 12 - Schedule Weekly Calls</h1>
+
+  <div class="section">
+    <h2>12.1. Schedule Weekly Calls (if needed)</h2>
+    <p>For clients who require ongoing support or have more complex needs, it’s essential to schedule weekly calls to maintain alignment and ensure that everything is progressing smoothly. Follow these steps:</p>
+
+    <h3>Step 1: Ask for Client's Time Zone</h3>
+    <p>Ask the client to provide their local time zone so you can align your call schedule accordingly.</p>
+
+    <h3>Step 2: Set a Fixed Weekly Call Time and Day</h3>
+    <p>Based on the client's time zone, establish a fixed time and day for the weekly calls to ensure both sides are aligned and can consistently meet. The fixed schedule helps maintain smooth communication.</p>
+
+    <div class="form-group">
+      <label for="client-time-zone">Client's Time Zone:</label>
+      <select id="client-time-zone">
+        <option value="0">UTC</option>
+        <option value="-5">Eastern Time (EST / UTC-5)</option>
+        <option value="-4">Eastern Daylight Time (EDT / UTC-4)</option>
+        <option value="-6">Central Time (CST / UTC-6)</option>
+        <option value="-8">Pacific Time (PST / UTC-8)</option>
+        <option value="1">Central European Time (CET / UTC+1)</option>
+        <option value="2">Eastern European Time (EET / UTC+2)</option>
+        <option value="5.5">India Standard Time (IST / UTC+5:30)</option>
+        <option value="7">Thailand (UTC+7)</option>
+        <option value="8" selected>China Standard Time (CST / UTC+8)</option>
+        <option value="9">Japan / Korea (UTC+9)</option>
+        <option value="10">Sydney (UTC+10)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="call-time">Proposed Call Time (in Client's Local Time):</label>
+      <input type="time" id="call-time" name="call-time">
+    </div>
+
+    <button onclick="confirmSchedule()">Confirm Weekly Call Schedule</button>
+
+    <div id="confirmation-message"></div>
+
+    <h3>Step 3: Create a Trello Task</h3>
+    <p>After scheduling the weekly call, create a task in the <a href="https://trello.com/b/rEllvRx5/task-manager-fulfill" target="_blank" class="trello-link">Trello Dashboard</a> for the meeting, including the scheduled time and key points to be discussed. This will ensure visibility and proper tracking for the management team.</p>
+
+    <h3>Step 4: Inform the Management Team</h3>
+    <p>After the meeting, make sure to update the Trello task with the outcomes of the meeting. This will ensure that the management team has visibility on the progress, and everyone stays aligned.</p>
+  </div>
+
+  <script>
+    function confirmSchedule() {
+      const clientTimeZone = document.getElementById('client-time-zone').value;
+      const callTime = document.getElementById('call-time').value;
+
+      if (callTime) {
+        const confirmationMessage = `
+          📅 Weekly Call Scheduled:
+          <br>Client's Time Zone: UTC${clientTimeZone}
+          <br>Proposed Call Time: ${callTime}
+        `;
+
+        document.getElementById('confirmation-message').innerHTML = confirmationMessage;
+      } else {
+        alert("Please select a time for the weekly call.");
+      }
+    }
+  </script>
+
+</body>
+</html>

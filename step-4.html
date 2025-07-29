@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Step 4: Introduce Team to Client</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #004080;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    .step-content {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .step-content h2 {
+      color: #004080;
+    }
+
+    .step-content p {
+      margin-bottom: 20px;
+    }
+
+    .message-container {
+      margin-top: 20px;
+      background-color: #e9f1ff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      white-space: pre-wrap; /* Ensures text wraps and doesn't overflow */
+      word-wrap: break-word; /* Breaks long words that might overflow */
+      max-width: 100%; /* Ensures the container never overflows */
+    }
+
+    .message-container ul {
+      list-style-type: none;
+      padding-left: 20px;
+    }
+
+    .message-container li {
+      margin-bottom: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+      background-color: #e9f1ff;
+    }
+
+    /* Link styling inside the pre */
+    .message-container a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .message-container a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Style for the copied message alert */
+    #messageCopied {
+      display: none;
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #28a745;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Step 4: Introduce Team to Client</h1>
+  </header>
+
+  <div class="step-content">
+    <h2>Step 4.1: Introduce Fulfill Team Members</h2>
+    <p>Within the new WhatsApp group you’ve created, introduce all Fulfill team members to the client. Make sure that all members are introduced with their full names.</p>
+
+    <h2>Step 4.2: Tag Everyone Using Full Names</h2>
+    <p>To ensure clarity, tag all team members in the WhatsApp group using their full names (not just surnames). This helps ensure that everyone is clearly identified.</p>
+
+    <div class="message-container">
+      <ul>
+        <li><strong>Example Introduction Message:</strong></li>
+        <li>
+          <code style="background:#f4f4f4; padding:12px; border-left: 5px solid #004080; font-family: monospace;">
+            Hi [Client's Name]! 👋<br />
+            Please meet your fulfillment support team:<br />
+            [Team Member 1] – Role<br />
+            [Team Member 2] – Role<br />
+            [Team Member 3] – Role
+          </code>
+        </li>
+      </ul>
+
+      <!-- Button to copy message to clipboard -->
+      <button onclick="copyMessageToClipboard()">Copy to Clipboard</button>
+      <p id="messageCopied">Message copied to clipboard!</p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Fulfill · Internal Use Only
+  </footer>
+
+  <script>
+    function copyMessageToClipboard() {
+      const message = `Hi [Client's Name]! 👋\nPlease meet your fulfillment support team:\n[Team Member 1] – Role\n[Team Member 2] – Role\n[Team Member 3] – Role`;
+      const textArea = document.createElement('textarea');
+      textArea.value = message;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+
+      const copiedMessage = document.getElementById('messageCopied');
+      copiedMessage.style.display = 'block';
+      setTimeout(() => copiedMessage.style.display = 'none', 2000);
+    }
+  </script>
+
+</body>
+</html>
